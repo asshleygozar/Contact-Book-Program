@@ -32,6 +32,18 @@ def display_contacts(contacts):
     for contact in contacts:
         print(f"Name: {contact['name']}, Phone: {contact['phone']}")
 
+def search_contacts(contacts):
+    name = input("Search by name: ")
+    for line in contacts:
+        if line["name"] == name:
+            print("Contact Name Found:")
+            print(line)
+            break
+            main()
+        else:
+            print("Contact Name does not exists")
+            main()
+
 
 def main():
     contacts = load_contacts()
@@ -39,7 +51,8 @@ def main():
         print("Choose your transaction: ")
         print("1. Add Contact")
         print("2. View Contacts")
-        print("3. Exit")
+        print("3. Search Contact")
+        print("4. Exit")
         choice = int(input("Enter here: "))
 
         match choice:
@@ -48,6 +61,8 @@ def main():
             case 2: 
                 display_contacts(contacts)
             case 3:
+                search_contacts(contacts)
+            case 4:
                 break
             case _:
                 print("Invalid Input!")
