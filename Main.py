@@ -26,11 +26,13 @@ def add_contacts(contacts, file_path):
             json.dump(contacts, file)
     except IOError:
         print("Error Saving Contacts")
-    print("Contact Infomration Added Successfully!")
+    print("Contact Information Added Successfully!")
 
 def display_contacts(contacts):
     for contact in contacts:
         print(f"Name: {contact['name']}, Phone: {contact['phone']}")
+    main()
+    
 
 def search_contacts(contacts):
     name = input("Search by name: ")
@@ -38,12 +40,24 @@ def search_contacts(contacts):
         if line["name"] == name:
             print("Contact Name Found:")
             print(line)
-            break
             main()
         else:
             print("Contact Name does not exists")
             main()
 
+def delete_contacts(contacts):
+    name = input("Delete by name: ")
+    for line in contacts:
+        if line['name'] == name:
+            del line["name"],line["phone"]
+            delete = [line for line in contacts if line]
+            with open(file_path, "w") as file:
+                json.dump(delete, file)
+                contacts = []
+            print("Contact Deleted Successfully")
+            break
+            main() 
+        
 
 def main():
     contacts = load_contacts()
@@ -52,17 +66,24 @@ def main():
         print("1. Add Contact")
         print("2. View Contacts")
         print("3. Search Contact")
-        print("4. Exit")
+        print("4. Delete Contact")
+        print("5. Exit")
         choice = int(input("Enter here: "))
 
         match choice:
             case 1: 
                 add_contacts(contacts,file_path)
+                break
             case 2: 
                 display_contacts(contacts)
+                break
             case 3:
                 search_contacts(contacts)
+                break
             case 4:
+                delete_contacts(contacts)
+                break
+            case 5:
                 break
             case _:
                 print("Invalid Input!")
