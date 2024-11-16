@@ -2,5 +2,6 @@
 ## Simple Commandline Program
 Features:
 - Add Contact Name and Number
-- View Contact Lists
-- Search Contact by Name
+- View contact lists
+- Search contact by name
+- Delete contact by name
