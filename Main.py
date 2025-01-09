@@ -4,15 +4,19 @@ file_path = "contacts.json"
 
 
 def load_contacts(file_path = "contacts.json"):
-    
+
     try:
         with open(file_path, "r") as file:
             contacts = json.load(file)
+
     except FileNotFoundError:
+
         contacts = []
+
     except json.JSONDecodeError:
         print("Error Reading Contacts. Starting with empty contact lists")
         contacts = []
+
     return contacts
 
 def add_contacts(contacts, file_path):
@@ -27,8 +31,10 @@ def add_contacts(contacts, file_path):
     try:
         with open(file_path, "a") as file:
             json.dump(details, file)
+            
     except IOError:
         print("Error Saving Contacts")
+
     print("Contact Information Added Successfully!")
 
 def display_contacts(contacts):
