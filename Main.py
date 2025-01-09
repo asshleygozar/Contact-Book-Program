@@ -4,6 +4,7 @@ file_path = "contacts.json"
 
 
 def load_contacts(file_path = "contacts.json"):
+    
     try:
         with open(file_path, "r") as file:
             contacts = json.load(file)
@@ -15,26 +16,30 @@ def load_contacts(file_path = "contacts.json"):
     return contacts
 
 def add_contacts(contacts, file_path):
+
     name = input("Enter your name: ")
     phone_number = input("Enter your Phone Number: ")
     
     details = {"name":name, "phone":phone_number}
     contacts.append(details)
+    print(type(contacts))
 
     try:
-        with open(file_path, "w") as file:
-            json.dump(contacts, file)
+        with open(file_path, "a") as file:
+            json.dump(details, file)
     except IOError:
         print("Error Saving Contacts")
     print("Contact Information Added Successfully!")
 
 def display_contacts(contacts):
+
     for contact in contacts:
         print(f"Name: {contact['name']}, Phone: {contact['phone']}")
     main()
     
 
 def search_contacts(contacts):
+
     name = input("Search by name: ")
     for line in contacts:
         if line["name"] == name:
@@ -46,7 +51,9 @@ def search_contacts(contacts):
             main()
 
 def delete_contacts(contacts):
+
     name = input("Delete by name: ")
+
     for line in contacts:
         if line['name'] == name:
             del line["name"],line["phone"]
@@ -60,8 +67,11 @@ def delete_contacts(contacts):
         
 
 def main():
+
     contacts = load_contacts()
+
     while True:
+
         print("Choose your transaction: ")
         print("1. Add Contact")
         print("2. View Contacts")
