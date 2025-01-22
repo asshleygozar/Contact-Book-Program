@@ -2,52 +2,33 @@ import json
 from database import ContactDatabase
 
 class ContactBook():
-        
-        def __init__(self, file_path="contacts.json"):
-            self.file_path = file_path
 
 
-        def load_contacts(file_path = "contacts.json"):
-
-            try:
-                with open(file_path, "r") as file:
-                    contacts = json.load(file)
-
-            except FileNotFoundError:
-
-                contacts = []
-
-            except json.JSONDecodeError:
-                print("Error Reading Contacts. Starting with empty contact lists")
-                contacts = []
-
-            return contacts
-
-        def add_contacts(contacts, file_path):
+        def add_contacts():
 
             name = input("Enter your name: ")
             phone_number = input("Enter your Phone Number: ")
             
             ContactDatabase.add_database(name,phone_number)
 
-        def display_contacts(contacts):
+        def display_contacts():
 
-            for contact in contacts:
-                print(f"Name: {contact['name']}, Phone: {contact['phone']}")
-            ContactBook.main()
-            
+            contact_info = ContactDatabase.database_display()
 
-        def search_contacts(contacts):
+            for contact in contact_info:
+                print(contact)
+
+        def search_contacts():
+
+            contact_search = ContactDatabase.database_search()
 
             name = input("Search by name: ")
-            for line in contacts:
-                if line["name"] == name:
+            for line in contact_search:
+                if line == name:
                     print("Contact Name Found:")
                     print(line)
-                    ContactBook.main()
-                else:
-                    print("Contact Name does not exists")
-                    ContactBook.main()
+            if line != name:
+                print("Contact Name does not exists")
 
         def delete_contacts(self,contacts):
 
@@ -67,8 +48,6 @@ class ContactBook():
 
         def main(self):
 
-            contacts = ContactBook.load_contacts()
-
             while True:
 
                 print("Choose your transaction: ")
@@ -81,16 +60,16 @@ class ContactBook():
 
                 match choice:
                     case 1: 
-                        ContactBook.add_contacts(contacts,self.file_path)
+                        ContactBook.add_contacts()
                         break
                     case 2: 
-                        ContactBook.display_contacts(contacts)
+                        ContactBook.display_contacts()
                         break
                     case 3:
-                        ContactBook.search_contacts(contacts)
+                        ContactBook.search_contacts()
                         break
                     case 4:
-                        ContactBook.delete_contacts(contacts)
+                        ContactBook.delete_contacts()
                         break
                     case 5:
                         break
