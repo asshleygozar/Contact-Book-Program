@@ -1,4 +1,5 @@
 import json
+from database import ContactDatabase
 
 class ContactBook():
         
@@ -27,18 +28,7 @@ class ContactBook():
             name = input("Enter your name: ")
             phone_number = input("Enter your Phone Number: ")
             
-            details = {"name":name, "phone":phone_number}
-            contacts.append(details)
-            print(type(contacts))
-
-            try:
-                with open(file_path, "a") as file:
-                    json.dump(details, file)
-                    
-            except IOError:
-                print("Error Saving Contacts")
-
-            print("Contact Information Added Successfully!")
+            ContactDatabase.add_database(name,phone_number)
 
         def display_contacts(contacts):
 
