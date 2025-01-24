@@ -11,18 +11,14 @@ class ContactBook():
             
             ContactDatabase.add_database(name,phone_number)
 
-        def display_contacts():
-
-            contact_info = ContactDatabase.database_display()
+        def display_contacts(contact_info):
 
             for contact in contact_info:
                 print(contact)
 
-        def search_contacts():
+        def search_contacts(contact_search):
 
-            contact_search = ContactDatabase.database_search()
-
-            name = input("Search by name: ")
+            name = input(str("Search by name: "))
             for line in contact_search:
                 if line == name:
                     print("Contact Name Found:")
@@ -30,23 +26,20 @@ class ContactBook():
             if line != name:
                 print("Contact Name does not exists")
 
-        def delete_contacts(self,contacts):
+        def delete_contacts(contacts):
 
             name = input("Delete by name: ")
 
-            for line in contacts:
-                if line['name'] == name:
-                    del line["name"],line["phone"]
-                    delete = [line for line in contacts if line]
-                    with open(self.file_path, "w") as file:
-                        json.dump(delete, file)
-                        contacts = []
-                    print("Contact Deleted Successfully")
-                    break
-                    main() 
+            for contact in contacts:
+                if contact == name:
+                   ContactDatabase.database_delete(name)
+            if contact != name:
+                print("Contact name does not exists!")
                 
 
         def main(self):
+
+            contacts = ContactDatabase.database_search()
 
             while True:
 
@@ -63,13 +56,13 @@ class ContactBook():
                         ContactBook.add_contacts()
                         break
                     case 2: 
-                        ContactBook.display_contacts()
+                        ContactBook.display_contacts(contacts)
                         break
                     case 3:
-                        ContactBook.search_contacts()
+                        ContactBook.search_contacts(contacts)
                         break
                     case 4:
-                        ContactBook.delete_contacts()
+                        ContactBook.delete_contacts(contacts)
                         break
                     case 5:
                         break
