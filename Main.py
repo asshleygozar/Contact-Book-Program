@@ -11,11 +11,12 @@ class ContactBook():
             
             ContactDatabase.add_database(name.strip().capitalize(),phone_number.strip())
 
-        def display_contacts(contact_info):
+        def display_contacts():
+            contact_info = ContactDatabase.database_display()
 
             for contact in contact_info:
                 print(contact)
-            print("Contact Info addded successfully!")
+            print("Contact info displayed successfully!")
 
         def search_contacts(contact_search):
 
@@ -57,7 +58,7 @@ class ContactBook():
                         ContactBook.add_contacts()
                         break
                     case 2: 
-                        ContactBook.display_contacts(contacts)
+                        ContactBook.display_contacts()
                         break
                     case 3:
                         ContactBook.search_contacts(contacts)
