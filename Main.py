@@ -9,18 +9,19 @@ class ContactBook():
             name = input("Enter your name: ")
             phone_number = input("Enter your Phone Number: ")
             
-            ContactDatabase.add_database(name,phone_number)
+            ContactDatabase.add_database(name.strip().capitalize(),phone_number.strip())
 
         def display_contacts(contact_info):
 
             for contact in contact_info:
                 print(contact)
+            print("Contact Info addded successfully!")
 
         def search_contacts(contact_search):
 
             name = input(str("Search by name: "))
             for line in contact_search:
-                if line == name:
+                if line == name.capitalize():
                     print("Contact Name Found:")
                     print(line)
             if line != name:
@@ -31,8 +32,8 @@ class ContactBook():
             name = input("Delete by name: ")
 
             for contact in contacts:
-                if contact == name:
-                   ContactDatabase.database_delete(name)
+                if contact == name.capitalize():
+                   ContactDatabase.database_delete(name.capitalize().strip())
             if contact != name:
                 print("Contact name does not exists!")
                 
